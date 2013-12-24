@@ -1,0 +1,20 @@
+Settings:
+  Other:
+    # If enabled then any item above a chest will get sucked in
+    ChestEater: true
+
+    # If enabled then activates redstone around the block that has an entity traveling through
+    Redstone: true
+
+  Movement:
+    # If enabled then any entity will be pushed along the repeater path.
+    Repeater: true
+
+    # If enabled then any entity will be pushed up the ladders.
+    Ladder: true
+
+    # If enabled then any item on top of a repeater with stairs in front of it will be shot like a cannon ball
+    StairCannon: true
+
+    # If enabled then pistons will fling any entities it pushes.
+    Piston: true

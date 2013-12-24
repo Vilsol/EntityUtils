@@ -1,6 +1,20 @@
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
+/target
+*.pydevproject
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.externalToolBuilders/
+*.launch
+.cproject
+.buildpath
+.texlipse
+.project
+.classpath

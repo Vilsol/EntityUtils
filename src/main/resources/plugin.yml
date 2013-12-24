@@ -1,0 +1,6 @@
+name: TenJava - Vilsol
+main: com.vilsol.tenjava.TenJava
+version: 1.0
+commands:
+   cleanup:
+      usage: /<command>
