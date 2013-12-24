@@ -58,46 +58,49 @@ public class EntityCalculator extends BukkitRunnable {
 
 			if(myBlock.getType() == Material.AIR){
 				if(myBlock.getType() == Material.DIODE_BLOCK_ON){
-					if(!plugin.getConfig().getBoolean("Settings.Movement.Repeater")) continue;
+					if(!plugin.getConfig().getBoolean("Settings.Repeater.Enabled")) continue;
 					Diode b = (Diode) myBlock.getState().getData();
 					
 					if(myBlock.getRelative(b.getFacing()).getType() != Material.DIODE_BLOCK_ON){
 						Material m = myBlock.getRelative(b.getFacing()).getType();
 						if(m == Material.WOOD_STAIRS){
-							if(!plugin.getConfig().getBoolean("Settings.Movement.StairCannon")) continue;
+							if(!plugin.getConfig().getBoolean("Settings.StairCannon.Enabled")) continue;
 							if(i instanceof Item){
-								i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(100).add(new Vector(0, 1, 0)));
+								i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(100 * plugin.getConfig().getDouble("Settings.StairCannon.Force")).add(new Vector(0, 1, 0)));
 							}else{
-								i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(400).add(new Vector(0, 1, 0)));
+								i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(400 * plugin.getConfig().getDouble("Settings.StairCannon.Force")).add(new Vector(0, 1, 0)));
 							}
 							continue;
-						}else if(m == Material.IRON_BLOCK){
-							i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(500)));
-							continue;
-						}else if(m == Material.REDSTONE_BLOCK){
-							i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(1000)));
-							continue;
-						}else if(m == Material.GOLD_BLOCK){
-							i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(1500)));
-							continue;
-						}else if(m == Material.LAPIS_BLOCK){
-							i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(2000)));
-							continue;
-						}else if(m == Material.DIAMOND_BLOCK){
-							i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(2500)));
-							continue;
+						}else{
+							if(!plugin.getConfig().getBoolean("Settings.Teleporter.Enabled")) continue;
+							
+							if(m == Material.IRON_BLOCK){
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Iron"))));
+							}else if(m == Material.REDSTONE_BLOCK){
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Redstone"))));
+							}else if(m == Material.GOLD_BLOCK){
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Gold"))));
+							}else if(m == Material.LAPIS_BLOCK){
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Lapis"))));
+							}else if(m == Material.DIAMOND_BLOCK){
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Diamond"))));
+							}else if(m == Material.EMERALD_BLOCK){
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Emerald"))));
+							}
+						}
+					}else{
+						if(myBlock.getRelative(BlockFace.DOWN).getType() == Material.SNOW_BLOCK && plugin.getConfig().getBoolean("Settings.Repeater.FastEnabled")){
+							i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(30 * plugin.getConfig().getDouble("Settings.Repeater.Fast")).add(Utils.centerExcludeFace(i.getLocation(), b.getFacing()).multiply(0.5)));
+						}else{
+							i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(30 * plugin.getConfig().getDouble("Settings.Repeater.Normal")).add(Utils.centerExcludeFace(i.getLocation(), b.getFacing()).multiply(0.5)));
 						}
 					}
-	
-					if(myBlock.getRelative(BlockFace.DOWN).getType() == Material.SNOW_BLOCK){
-						i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(100).add(Utils.centerExcludeFace(i.getLocation(), b.getFacing()).multiply(0.5)));
-					}else{
-						i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(30).add(Utils.centerExcludeFace(i.getLocation(), b.getFacing()).multiply(0.5)));
-					}
+					
 					Utils.powerBlock(i.getLocation());
 				}else if(myBlock.getType() == Material.LADDER){
-					if(!plugin.getConfig().getBoolean("Settings.Movement.Ladder")) continue;
+					if(!plugin.getConfig().getBoolean("Settings.Other.Ladder")) continue;
 					Ladder l = (Ladder) myBlock.getState().getData();
+					
 					if(myBlock.getRelative(BlockFace.UP, 2).getType() == Material.LADDER && myBlock.getRelative(BlockFace.UP).getType() == Material.LADDER){
 						Ladder lu = (Ladder) myBlock.getRelative(BlockFace.UP).getState().getData();
 						i.setVelocity(new Vector(0, 0.5, 0).add(Utils.center(i.getLocation()).multiply(0.3)).add(Utils.faceToForce(lu.getAttachedFace()).multiply(50)));
@@ -105,6 +108,7 @@ public class EntityCalculator extends BukkitRunnable {
 						i.teleport(i.getLocation().add(0, 2, 0).add(Utils.faceToForce(l.getAttachedFace()).multiply(100)));
 						i.setVelocity(new Vector(0, 0, 0));
 					}
+					
 					Utils.powerBlock(i.getLocation());
 				}	
 			}else if(myBlock.getRelative(BlockFace.DOWN).getType() == Material.CHEST){
