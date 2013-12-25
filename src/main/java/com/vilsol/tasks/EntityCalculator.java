@@ -56,7 +56,7 @@ public class EntityCalculator extends BukkitRunnable {
 
 			Block myBlock = i.getLocation().getBlock();
 
-			if(myBlock.getType() == Material.AIR){
+			if(myBlock.getType() != Material.AIR){
 				if(myBlock.getType() == Material.DIODE_BLOCK_ON){
 					if(!plugin.getConfig().getBoolean("Settings.Repeater.Enabled")) continue;
 					Diode b = (Diode) myBlock.getState().getData();
