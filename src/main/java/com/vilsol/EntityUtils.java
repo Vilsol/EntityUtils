@@ -1,14 +1,17 @@
-package com.vilsol.tenjava;
+package com.vilsol;
+
+import java.io.IOException;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.Metrics;
 
-import com.vilsol.tenjava.commands.CleanupCommand;
-import com.vilsol.tenjava.listeners.PistonListener;
-import com.vilsol.tenjava.tasks.EntityCalculator;
+import com.vilsol.commands.CleanupCommand;
+import com.vilsol.listeners.PistonListener;
+import com.vilsol.tasks.EntityCalculator;
 
-public class TenJava extends JavaPlugin {
+public class EntityUtils extends JavaPlugin {
 
-	private static TenJava plugin;
+	private static EntityUtils plugin;
 	private EntityCalculator calc;
 
 	public void onEnable() {
@@ -19,6 +22,11 @@ public class TenJava extends JavaPlugin {
 		calc.runTaskTimer(this, 0L, 2L);
 		getServer().getPluginManager().registerEvents(new PistonListener(this), this);
 		getCommand("cleanup").setExecutor(new CleanupCommand(this));
+		
+		try {
+		    Metrics metrics = new Metrics(this);
+		    metrics.start();
+		} catch (IOException e) { }
 	}
 
 	public void onDisable() {
@@ -29,7 +37,7 @@ public class TenJava extends JavaPlugin {
 	 * Returns the plugin instance
 	 * @return
 	 */
-	public static TenJava getPlugin() {
+	public static EntityUtils getPlugin() {
 		return plugin;
 	}
 

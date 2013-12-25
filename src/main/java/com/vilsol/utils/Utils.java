@@ -1,4 +1,4 @@
-package com.vilsol.tenjava.utils;
+package com.vilsol.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import com.vilsol.tenjava.TenJava;
+import com.vilsol.EntityUtils;
 
 public class Utils {
 
@@ -96,14 +96,14 @@ public class Utils {
 	 */
 	@SuppressWarnings("deprecation")
 	public static void powerBlock(Location l) {
-		if (!TenJava.getPlugin().getConfig()
+		if (!EntityUtils.getPlugin().getConfig()
 				.getBoolean("Settings.Other.Redstone"))
 			return;
 		final Block b = l.getBlock();
 
 		if (b.getRelative(BlockFace.NORTH).getType() == Material.REDSTONE_WIRE) {
 			b.getRelative(BlockFace.NORTH).setData((byte) 15);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(TenJava.getPlugin(),
+			Bukkit.getScheduler().scheduleSyncDelayedTask(EntityUtils.getPlugin(),
 					new Runnable() {
 						public void run() {
 							b.getRelative(BlockFace.NORTH).setData((byte) 0);
@@ -111,7 +111,7 @@ public class Utils {
 					}, 5L);
 		} else if (b.getRelative(BlockFace.EAST).getType() == Material.REDSTONE_WIRE) {
 			b.getRelative(BlockFace.EAST).setData((byte) 15);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(TenJava.getPlugin(),
+			Bukkit.getScheduler().scheduleSyncDelayedTask(EntityUtils.getPlugin(),
 					new Runnable() {
 						public void run() {
 							b.getRelative(BlockFace.EAST).setData((byte) 0);
@@ -119,7 +119,7 @@ public class Utils {
 					}, 5L);
 		} else if (b.getRelative(BlockFace.SOUTH).getType() == Material.REDSTONE_WIRE) {
 			b.getRelative(BlockFace.SOUTH).setData((byte) 15);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(TenJava.getPlugin(),
+			Bukkit.getScheduler().scheduleSyncDelayedTask(EntityUtils.getPlugin(),
 					new Runnable() {
 						public void run() {
 							b.getRelative(BlockFace.SOUTH).setData((byte) 0);
@@ -127,7 +127,7 @@ public class Utils {
 					}, 5L);
 		} else if (b.getRelative(BlockFace.WEST).getType() == Material.REDSTONE_WIRE) {
 			b.getRelative(BlockFace.WEST).setData((byte) 15);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(TenJava.getPlugin(),
+			Bukkit.getScheduler().scheduleSyncDelayedTask(EntityUtils.getPlugin(),
 					new Runnable() {
 						public void run() {
 							b.getRelative(BlockFace.WEST).setData((byte) 0);
@@ -150,7 +150,7 @@ public class Utils {
 					&& e.getLocation().getBlockY() == l.getBlockY()
 					&& e.getLocation().getBlockZ() == l.getBlockZ()) {
 				e.setVelocity(e.getVelocity().add(
-						Utils.faceToForce(face).multiply(50)));
+						Utils.faceToForce(face).multiply(100 * EntityUtils.getPlugin().getConfig().getDouble("Settings.Piston.Force"))));
 			}
 		}
 	}
@@ -159,8 +159,8 @@ public class Utils {
 		new BukkitRunnable(){
 			public void run() {
 				int i = 0;
-				if(TenJava.getPlugin().getCalc().getAllEntities().size() == 0) this.cancel();
-				for(Entity e : TenJava.getPlugin().getCalc().getAllEntities()){
+				if(EntityUtils.getPlugin().getCalc().getAllEntities().size() == 0) this.cancel();
+				for(Entity e : EntityUtils.getPlugin().getCalc().getAllEntities()){
 					if(e instanceof Player) continue;
 					if(i == 10) return;
 					e.remove();
@@ -168,7 +168,7 @@ public class Utils {
 				}
 				this.cancel();
 			}
-		}.runTaskTimer(TenJava.getPlugin(), 0L, 1L);
+		}.runTaskTimer(EntityUtils.getPlugin(), 0L, 1L);
 	}
 
 }

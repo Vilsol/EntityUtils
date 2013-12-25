@@ -1,4 +1,4 @@
-package com.vilsol.tenjava.tasks;
+package com.vilsol.tasks;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,15 +19,15 @@ import org.bukkit.material.Ladder;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import com.vilsol.tenjava.TenJava;
-import com.vilsol.tenjava.utils.Utils;
+import com.vilsol.EntityUtils;
+import com.vilsol.utils.Utils;
 
 public class EntityCalculator extends BukkitRunnable {
 
-	private TenJava plugin;
+	private EntityUtils plugin;
 	private List<Entity> following = new ArrayList<Entity>();
 	
-	public EntityCalculator(TenJava plugin){
+	public EntityCalculator(EntityUtils plugin){
 		this.plugin = plugin;
 	}
 	

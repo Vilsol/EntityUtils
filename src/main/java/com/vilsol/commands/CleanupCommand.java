@@ -1,18 +1,18 @@
-package com.vilsol.tenjava.commands;
+package com.vilsol.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import com.vilsol.tenjava.TenJava;
-import com.vilsol.tenjava.utils.Utils;
+import com.vilsol.EntityUtils;
+import com.vilsol.utils.Utils;
 
 public class CleanupCommand implements CommandExecutor {
 
-	private TenJava plugin;
+	private EntityUtils plugin;
 	
-	public CleanupCommand(TenJava tenJava) {
+	public CleanupCommand(EntityUtils tenJava) {
 		this.plugin = tenJava;
 	}
 

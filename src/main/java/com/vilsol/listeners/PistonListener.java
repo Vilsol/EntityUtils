@@ -1,17 +1,17 @@
-package com.vilsol.tenjava.listeners;
+package com.vilsol.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 
-import com.vilsol.tenjava.TenJava;
-import com.vilsol.tenjava.utils.Utils;
+import com.vilsol.EntityUtils;
+import com.vilsol.utils.Utils;
 
 public class PistonListener implements Listener {
 
-	private TenJava plugin;
+	private EntityUtils plugin;
 	
-	public PistonListener(TenJava plugin){
+	public PistonListener(EntityUtils plugin){
 		this.plugin = plugin;
 	}
 	
