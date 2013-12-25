@@ -1,5 +1,5 @@
-name: TenJava - Vilsol
-main: com.vilsol.tenjava.TenJava
+name: EntityUtils
+main: com.vilsol.EntityUtils
 version: 1.0
 commands:
    cleanup:
