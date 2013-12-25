@@ -44,6 +44,8 @@ public class EntityCalculator extends BukkitRunnable {
 	}
 	
 	public void run() {
+		if(plugin.getTpsCounter().getAverageTPS() < plugin.getConfig().getDouble("Settings.Other.MinimumTPS")) return;
+		
 		following.addAll(getAllEntities());
 		Iterator<Entity> iterator = following.iterator();
 		while(iterator.hasNext()){
@@ -60,6 +62,7 @@ public class EntityCalculator extends BukkitRunnable {
 				if(myBlock.getType() == Material.DIODE_BLOCK_ON){
 					if(!plugin.getConfig().getBoolean("Settings.Repeater.Enabled")) continue;
 					Diode b = (Diode) myBlock.getState().getData();
+					Utils.powerBlock(i.getLocation());
 					
 					if(myBlock.getRelative(b.getFacing()).getType() != Material.DIODE_BLOCK_ON){
 						Material m = myBlock.getRelative(b.getFacing()).getType();
@@ -86,6 +89,12 @@ public class EntityCalculator extends BukkitRunnable {
 								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Diamond"))));
 							}else if(m == Material.EMERALD_BLOCK){
 								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Emerald"))));
+							}else{
+								if(myBlock.getRelative(BlockFace.DOWN).getType() == Material.SNOW_BLOCK && plugin.getConfig().getBoolean("Settings.Repeater.FastEnabled")){
+									i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(30 * plugin.getConfig().getDouble("Settings.Repeater.Fast")).add(Utils.centerExcludeFace(i.getLocation(), b.getFacing()).multiply(0.5)));
+								}else{
+									i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(30 * plugin.getConfig().getDouble("Settings.Repeater.Normal")).add(Utils.centerExcludeFace(i.getLocation(), b.getFacing()).multiply(0.5)));
+								}
 							}
 						}
 					}else{
@@ -96,7 +105,6 @@ public class EntityCalculator extends BukkitRunnable {
 						}
 					}
 					
-					Utils.powerBlock(i.getLocation());
 				}else if(myBlock.getType() == Material.LADDER){
 					if(!plugin.getConfig().getBoolean("Settings.Other.Ladder")) continue;
 					Ladder l = (Ladder) myBlock.getState().getData();

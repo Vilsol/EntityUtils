@@ -50,3 +50,6 @@ Settings:
 
     # If enabled then any entity will be pushed up the ladders.
     Ladder: true
+    
+    # The minimum amount of TPS when the plugin should run
+    MinimumTPS: 10.0

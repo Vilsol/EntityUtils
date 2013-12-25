@@ -4,3 +4,5 @@ version: 1.0
 commands:
    cleanup:
       usage: /<command>
+   tps:
+      usage: /<command>
