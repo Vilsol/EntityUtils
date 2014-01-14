@@ -99,9 +99,9 @@ public class EntityCalculator extends BukkitRunnable {
 						}
 					}else{
 						if(myBlock.getRelative(BlockFace.DOWN).getType() == Material.SNOW_BLOCK && plugin.getConfig().getBoolean("Settings.Repeater.FastEnabled")){
-							i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(30 * plugin.getConfig().getDouble("Settings.Repeater.Fast")).add(Utils.centerExcludeFace(i.getLocation(), b.getFacing()).multiply(0.5)));
+							i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(30 * plugin.getConfig().getDouble("Settings.Repeater.Fast")).add(Utils.centerExcludeFace(i.getLocation(), b.getFacing()).multiply(0.7)));
 						}else{
-							i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(30 * plugin.getConfig().getDouble("Settings.Repeater.Normal")).add(Utils.centerExcludeFace(i.getLocation(), b.getFacing()).multiply(0.5)));
+							i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(30 * plugin.getConfig().getDouble("Settings.Repeater.Normal")).add(Utils.centerExcludeFace(i.getLocation(), b.getFacing()).multiply(0.7)));
 						}
 					}
 					
@@ -110,8 +110,9 @@ public class EntityCalculator extends BukkitRunnable {
 					Ladder l = (Ladder) myBlock.getState().getData();
 					
 					if(myBlock.getRelative(BlockFace.UP, 2).getType() == Material.LADDER && myBlock.getRelative(BlockFace.UP).getType() == Material.LADDER){
+						if(i.getVelocity().getY() > 1) continue;
 						Ladder lu = (Ladder) myBlock.getRelative(BlockFace.UP).getState().getData();
-						i.setVelocity(new Vector(0, 0.5, 0).add(Utils.center(i.getLocation()).multiply(0.3)).add(Utils.faceToForce(lu.getAttachedFace()).multiply(50)));
+						i.setVelocity(new Vector(0, 1, 0).add(Utils.center(i.getLocation()).multiply(0.3)).add(Utils.faceToForce(lu.getAttachedFace()).multiply(50)));
 					}else{
 						i.teleport(i.getLocation().add(0, 2, 0).add(Utils.faceToForce(l.getAttachedFace()).multiply(100)));
 						i.setVelocity(new Vector(0, 0, 0));

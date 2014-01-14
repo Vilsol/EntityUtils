@@ -22,7 +22,7 @@ public class EntityUtils extends JavaPlugin {
 		saveDefaultConfig();
 		
 		calc = new EntityCalculator(this);
-		calc.runTaskTimer(this, 0L, 3L);
+		calc.runTaskTimer(this, 0L, 5L);
 		
 		getServer().getPluginManager().registerEvents(new PistonListener(this), this);
 		getCommand("cleanup").setExecutor(new CleanupCommand(this));
