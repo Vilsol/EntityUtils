@@ -78,17 +78,17 @@ public class EntityCalculator extends BukkitRunnable {
 							if(!plugin.getConfig().getBoolean("Settings.Teleporter.Enabled")) continue;
 							
 							if(m == Material.IRON_BLOCK){
-								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Iron"))));
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Iron")*100)));
 							}else if(m == Material.REDSTONE_BLOCK){
-								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Redstone"))));
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Redstone")*100)));
 							}else if(m == Material.GOLD_BLOCK){
-								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Gold"))));
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Gold")*100)));
 							}else if(m == Material.LAPIS_BLOCK){
-								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Lapis"))));
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Lapis")*100)));
 							}else if(m == Material.DIAMOND_BLOCK){
-								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Diamond"))));
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Diamond")*100)));
 							}else if(m == Material.EMERALD_BLOCK){
-								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Emerald"))));
+								i.teleport(i.getLocation().add(Utils.faceToForce(b.getFacing()).multiply(plugin.getConfig().getDouble("Settings.Teleporter.Emerald")*100)));
 							}else{
 								if(myBlock.getRelative(BlockFace.DOWN).getType() == Material.SNOW_BLOCK && plugin.getConfig().getBoolean("Settings.Repeater.FastEnabled")){
 									i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(30 * plugin.getConfig().getDouble("Settings.Repeater.Fast")).add(Utils.centerExcludeFace(i.getLocation(), b.getFacing()).multiply(0.5)));
