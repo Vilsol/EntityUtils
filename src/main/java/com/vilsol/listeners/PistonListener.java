@@ -17,8 +17,8 @@ public class PistonListener implements Listener {
 	
 	@EventHandler
 	public void onPistonExtend(BlockPistonExtendEvent evt){
-		if(!plugin.getConfig().getBoolean("Settings.Movement.Piston")) return;
-		Utils.pushEntities(evt.getBlock().getRelative(evt.getDirection()).getLocation(), evt.getDirection());
+        if(!plugin.getConfig().getBoolean("Settings.Piston.Enabled")) return;
+        Utils.pushEntities(evt.getBlock().getRelative(evt.getDirection()).getLocation(), evt.getDirection());
 	}
 	
 }

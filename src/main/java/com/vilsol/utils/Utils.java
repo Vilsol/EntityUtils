@@ -22,7 +22,7 @@ public class Utils {
 
 	/**
 	 * Converts the provided face to a vector that is pointing in that direction
-	 * 
+	 *
 	 * @param face
 	 * @return Vector with the direction
 	 */
@@ -45,7 +45,7 @@ public class Utils {
 
 	/**
 	 * Returns a vector that points to the center of the block
-	 * 
+	 *
 	 * @param align
 	 * @return Vector with the direction
 	 */
@@ -65,7 +65,7 @@ public class Utils {
 	/**
 	 * Returns a vector that points to the center of the block excluding the
 	 * selected face
-	 * 
+	 *
 	 * @param align
 	 * @param face
 	 * @return Vector with the direction
@@ -91,15 +91,15 @@ public class Utils {
 
 	/**
 	 * Powers the block activating any redstone around
-	 * 
+	 *
 	 * @param location
 	 */
 	@SuppressWarnings("deprecation")
-	public static void powerBlock(Location l) {
+	public static void powerBlock(Location location) {
 		if (!EntityUtils.getPlugin().getConfig()
 				.getBoolean("Settings.Other.Redstone"))
 			return;
-		final Block b = l.getBlock();
+		final Block b = location.getBlock();
 
 		if (b.getRelative(BlockFace.NORTH).getType() == Material.REDSTONE_WIRE) {
 			b.getRelative(BlockFace.NORTH).setData((byte) 15);
@@ -137,18 +137,18 @@ public class Utils {
 	}
 
 	/**
-	 * 
+	 *
 	 * All entities that are in this location will get blasted away in the
 	 * blockface direction
-	 * 
+	 *
 	 * @param location
 	 * @param face
 	 */
-	public static void pushEntities(Location l, BlockFace face) {
-		for (Entity e : l.getWorld().getEntities()) {
-			if (e.getLocation().getBlockX() == l.getBlockX()
-					&& e.getLocation().getBlockY() == l.getBlockY()
-					&& e.getLocation().getBlockZ() == l.getBlockZ()) {
+	public static void pushEntities(Location location, BlockFace face) {
+		for (Entity e : location.getWorld().getEntities()) {
+			if (e.getLocation().getBlockX() == location.getBlockX()
+					&& e.getLocation().getBlockY() == location.getBlockY()
+					&& e.getLocation().getBlockZ() == location.getBlockZ()) {
 				e.setVelocity(e.getVelocity().add(
 						Utils.faceToForce(face).multiply(100 * EntityUtils.getPlugin().getConfig().getDouble("Settings.Piston.Force"))));
 			}

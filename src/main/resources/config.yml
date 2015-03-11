@@ -2,30 +2,30 @@ Settings:
   Repeater:
     # If enabled then any entity will be pushed along the repeater path.
     Enabled: true
-    
+
     # If enabled then entities on top of a fast block will move faster
     FastEnabled: true
-    
+
     # Normal multiplier
     Normal: 1.0
-    
+
     # Fast block multiplier
     Fast: 3.0
-    
+
     # Fast blcok id. By default 80 (Snow)
     FastBlock: 80
-  
+
   Piston:
     # If enabled then pistons will fling any entities it pushes.
     Enabled: true
-    
+
     # The force multiplier
     Force: 1.0
-  
+
   Teleporter:
     # If enabled then any entity on top of a repeater with a block in fron if it will be teleported
     Enabled: true
-    
+
     # The amount of blocks the entity will be teleported
     Iron: 5
     Redstone: 10
@@ -33,14 +33,14 @@ Settings:
     Lapis: 20
     Diamond: 25
     Emerald: 30
-  
+
   StairCannon:
     # If enabled then any entity on top of a repeater with stairs in front of it will be shot like a cannon ball
     Enabled: true
-    
+
     # The force multiplier
     Force: 1.0
-  
+
   Other:
     # If enabled then any item above a chest will get sucked in
     ChestEater: true
@@ -50,6 +50,6 @@ Settings:
 
     # If enabled then any entity will be pushed up the ladders.
     Ladder: true
-    
+
     # The minimum amount of TPS when the plugin should run
     MinimumTPS: 10.0

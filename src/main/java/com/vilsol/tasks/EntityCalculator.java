@@ -1,10 +1,7 @@
 package com.vilsol.tasks;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-
+import com.vilsol.EntityUtils;
+import com.vilsol.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -19,8 +16,10 @@ import org.bukkit.material.Ladder;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import com.vilsol.EntityUtils;
-import com.vilsol.utils.Utils;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 public class EntityCalculator extends BukkitRunnable {
 
@@ -33,7 +32,7 @@ public class EntityCalculator extends BukkitRunnable {
 	
 	/**
 	 * Returns all entities from all worlds
-	 * @return
+	 * @return list of all entities
 	 */
 	public Collection<? extends Entity> getAllEntities(){
 		List<Entity> ent = new ArrayList<Entity>();
@@ -73,8 +72,7 @@ public class EntityCalculator extends BukkitRunnable {
 							}else{
 								i.setVelocity(Utils.faceToForce(b.getFacing()).multiply(400 * plugin.getConfig().getDouble("Settings.StairCannon.Force")).add(new Vector(0, 1, 0)));
 							}
-							continue;
-						}else{
+                        }else{
 							if(!plugin.getConfig().getBoolean("Settings.Teleporter.Enabled")) continue;
 							
 							if(m == Material.IRON_BLOCK){
@@ -130,6 +128,7 @@ public class EntityCalculator extends BukkitRunnable {
 				}
 			}
 		}
+		following.clear();
 	}
 
 }

@@ -17,7 +17,7 @@ public class CleanupCommand implements CommandExecutor {
 	}
 
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-		arg0.sendMessage(Utils.prefix + "Cleaning up " + (plugin.getCalc().getAllEntities().size() - Bukkit.getOnlinePlayers().length) + " entities!");
+		arg0.sendMessage(Utils.prefix + "Cleaning up " + (plugin.getCalc().getAllEntities().size() - Bukkit.getOnlinePlayers().size()) + " entities!");
 		Utils.cleanupEntities();
 		return true;
 	}
